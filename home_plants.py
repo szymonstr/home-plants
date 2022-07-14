@@ -21,6 +21,8 @@ def manage_illumination(lamp, light_detector):
             switch_on_lights(lamp)
         else:
             switch_off_lights(lamp)
+    else:
+        switch_off_lights(lamp)
 
 
 def switch_on_heating():
