@@ -1,4 +1,8 @@
 from gpio import gpio_manager
+import logging
+
+logging.basicConfig(filename="log.txt")
+logger = logging.getLogger("light")
 
 
 class Lamp:
@@ -16,8 +20,9 @@ class Lamp:
     def switch_on(self):
         gpio_manager.set_state(self.gpio_pin, 0)
         self.state = 0
+        logger.info("Switch on lamp: {}".format(self.name))
 
     def switch_off(self):
         gpio_manager.set_state(self.gpio_pin, 1)
         self.state = 1
-
+        logger.info("Switch off lamp: {}".format(self.name))
