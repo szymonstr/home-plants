@@ -2,6 +2,7 @@ import RPi.GPIO as GPIO
 
 LIGHT_SENSOR = 7
 LAMP_RELAY = 16
+ENVIRONMENT_SENSOR = 15
 
 
 def get_light_sensor_pin():
@@ -10,6 +11,10 @@ def get_light_sensor_pin():
 
 def get_lamp_relay_pin():
     return LAMP_RELAY
+
+
+def get_environment_sensor_pin():
+    return ENVIRONMENT_SENSOR
 
 
 def setup():

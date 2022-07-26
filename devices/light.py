@@ -1,7 +1,7 @@
 from gpio import gpio_manager
 import logging
 
-logging.basicConfig(filename="log.txt")
+logging.basicConfig(filename="log.txt", level=logging.INFO)
 logger = logging.getLogger("light")
 
 

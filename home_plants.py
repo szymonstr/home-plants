@@ -1,11 +1,11 @@
 from gpio import gpio_manager
-from devices import light, light_sensor
+from devices import light, light_sensor, environmental_sensor
 import timer
 
 import time
 import logging
 
-logging.basicConfig(filename="log.txt")
+logging.basicConfig(filename="log.txt", level=logging.INFO)
 logger = logging.getLogger("home_plants")
 
 
@@ -22,6 +22,7 @@ def switch_off_lights(lamp):
 def manage_illumination(lamp, light_detector):
     darkness = light_detector.get_status()
     logger.info("Darkness: {}".format(darkness))
+    logger.info("Lamp state: {}".format(lamp.state))
     if timer.get_status():
         if darkness:
             switch_on_lights(lamp)
@@ -29,6 +30,11 @@ def manage_illumination(lamp, light_detector):
             switch_off_lights(lamp)
     else:
         switch_off_lights(lamp)
+
+
+def environment_status(env_sensor):
+    humidity, temp = env_sensor.get_data()
+    logger.info("Temperature: {}*C Humidity: {}%".format(temp, humidity))
 
 
 def switch_on_heating():
@@ -55,8 +61,13 @@ def main():
     light_sensor_pin = gpio_manager.LIGHT_SENSOR
     light_detector = light_sensor.LightSensor(env_name, light_sensor_pin)
 
+    env_sensor_limit = 5
+    env_sensor_pin = gpio_manager.get_environment_sensor_pin()
+    env_sensor = environmental_sensor.EnvironmentalSensor(env_name, env_sensor_pin, env_sensor_limit)
+
     while(True):
         manage_illumination(lamp, light_detector)
+        environment_status(env_sensor)
         time.sleep(15 * 60)
 
 
