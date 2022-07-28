@@ -1,4 +1,4 @@
-from gpio import gpio_manager
+from manage import gpio_manager
 
 
 class LightSensor:

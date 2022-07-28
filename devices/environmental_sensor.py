@@ -1,10 +1,9 @@
-import logging
 import time
-
 import dht11
 
-logging.basicConfig(filename="log.txt", level=logging.INFO)
-logger = logging.getLogger("environmental_sensor")
+from manage import logger
+
+logger = logger.get_logger("environmental_sensor")
 
 
 class EnvironmentalSensor:

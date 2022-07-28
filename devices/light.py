@@ -1,8 +1,6 @@
-from gpio import gpio_manager
-import logging
+from manage import gpio_manager, logger
 
-logging.basicConfig(filename="log.txt", level=logging.INFO)
-logger = logging.getLogger("light")
+logger = logger.get_logger("light")
 
 
 class Lamp:

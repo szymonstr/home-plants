@@ -1,12 +1,10 @@
-from gpio import gpio_manager
-from devices import light, light_sensor, environmental_sensor
-import timer
-
 import time
-import logging
 
-logging.basicConfig(filename="log.txt", level=logging.INFO)
-logger = logging.getLogger("home_plants")
+from manage import gpio_manager, timer, logger
+from devices import light, light_sensor, environmental_sensor
+
+
+logger = logger.get_logger("home_plants")
 
 
 def switch_on_lights(lamp):
